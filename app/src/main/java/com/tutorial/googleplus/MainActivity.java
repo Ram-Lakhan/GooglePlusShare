@@ -16,11 +16,12 @@ import com.google.android.gms.plus.PlusShare;
  * Created by android-Ram Lakhan on 23/2/16.
  **/
 
-public class TestActivity extends Activity {
+public class MainActivity extends Activity {
 
     private String imageUrl = "http://i.forbesimg.com/media/lists/companies/google_416x416.jpg";
     private String description = "Google Plus share Tutorial";
     private Context mContext;
+    private int REQUEST_FOR_GOOGLE_PLUS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class TestActivity extends Activity {
                     }
 
                     // Intent share Text and Image.
-                    Intent shareIntent = new PlusShare.Builder(TestActivity.this)
+                    Intent shareIntent = new PlusShare.Builder(MainActivity.this)
                             .setType("text/plain")
                             .setText("ABC")
                             .setContentUrl(Uri.parse("http://i.forbesimg.com/media/lists/companies/google_416x416.jpg"))
@@ -56,7 +57,7 @@ public class TestActivity extends Activity {
 
     }
 
-
+    // isPackageInstalled method is check package name.
     private boolean isPackageInstalled(String packagename, Context context) {
         PackageManager pm = context.getPackageManager();
         try {
@@ -67,18 +68,16 @@ public class TestActivity extends Activity {
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        // TODO Auto-generated method stub
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_FOR_GOOGLE_PLUS) {
-//            if (resultCode == RESULT_OK) {
-////                finish();
-//            } else {
-//                Toast.makeText(mContext, "Post Cancel?", Toast.LENGTH_LONG).show();
-////                finish();
-//            }
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_FOR_GOOGLE_PLUS) {
+            if (resultCode == RESULT_OK) {
+            } else {
+                Toast.makeText(mContext, "Post Cancel!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }
