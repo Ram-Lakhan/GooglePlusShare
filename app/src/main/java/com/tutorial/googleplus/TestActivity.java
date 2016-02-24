@@ -40,6 +40,7 @@ public class TestActivity extends Activity {
                         description = "";
                     }
 
+                    // Intent share Text and Image.
                     Intent shareIntent = new PlusShare.Builder(TestActivity.this)
                             .setType("text/plain")
                             .setText("ABC")
