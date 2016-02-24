@@ -18,6 +18,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Created by android-Ram Lakhan on 23/2/16.
+ **/
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -53,13 +57,14 @@ public class MainActivity extends AppCompatActivity {
             if (isGooglePlusInstalled()) {
                 try {
                     File rootSdDirectory = Environment.getExternalStorageDirectory();
-
+//
                     pictureFile = new File(rootSdDirectory, "attachment.jpg");
                     if (pictureFile.exists()) {
                         pictureFile.delete();
+                        pictureFile.mkdirs();
+                        pictureFile.createNewFile();
                     }
-                    pictureFile.createNewFile();
-
+//                    pictureFile.createNewFile();
                     FileOutputStream fos = new FileOutputStream(pictureFile);
 
                     // Set URL to static image path as web.
@@ -81,10 +86,14 @@ public class MainActivity extends AppCompatActivity {
 
                     // Intent to post text and image share on Google Plus post activity.
                     Intent shareIntent = ShareCompat.IntentBuilder.from(MainActivity.this)
-                            .setText("Hello Android!").setType("image/jpeg")
-                            .setStream(pictureUri).getIntent()
+                            .setText("Hello Android!")
+                            .setType("image/jpeg")
+                            .setStream(pictureUri)
+                            .getIntent()
                             .setPackage("com.google.android.apps.plus");
                     startActivity(shareIntent);
+
+                    // .setStream(pictureUri).getIntent()
 
                 } catch (Exception e) {
                     System.out.print(e);
